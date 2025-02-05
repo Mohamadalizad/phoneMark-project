@@ -1,0 +1,19 @@
+.bg-melo-gray {
+    background-color: rgb(175, 173, 173);
+}
+.border-left {
+    border-left: solid 2px rgb(209, 207, 207);
+}
+.active {
+    background-color: white !important;
+}
+.contacts{
+    background-color: rgba(128, 128, 128, 0.247);
+    box-shadow: 0 0 5px rgba(128, 128, 128, 0.295);
+    padding: .5rem;
+    transition: all ease .3s;
+}
+.contacts:hover{
+    background-color: rgba(26, 7, 77, 0.288);
+    transform:translateX(-3px) ;
+}

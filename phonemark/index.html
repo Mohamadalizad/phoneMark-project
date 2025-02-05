@@ -1,0 +1,105 @@
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timad.com | phonemark</title>
+    <script src="./../../cdns/Vue cdn/vue.js"></script>
+    <link rel="stylesheet" href="./fonts/Vazir.css">
+    <link rel="stylesheet" href="./cdns/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./cdns/toastr.css">
+    <script src="./toastr.js"></script>
+</head>
+<body class="mx-auto d-flex align-content-center justify-content-center" style="background-color: rgb(209, 207, 207); font-family: 'Vazir' , serif;">
+    <!-- start phoneMark project -->
+    <div id="app" class="container justify-content-center align-content-center h-100">
+        <!-- navbar phoneMark -->
+        <div style="width: 250px;" class="row mx-auto nav nav-pills">
+            <a href="#" @click="changeDisplay('all')" :class="{'active':activeDisplay=='all'} "
+                class="text-decoration-none text-dark col-4 text-center p-2 bg-melo-gray border-left">نمایش</a>
+            <a href="#" @click="changeDisplay('search')" :class="{'active':activeDisplay=='search'}"
+                class="text-decoration-none text-dark col-4 text-center p-2 bg-melo-gray border-left">جستجو</a>
+            <a href="#" @click="changeDisplay('add')" :class="{'active':activeDisplay=='add'}"
+                class="text-decoration-none text-dark col-4 text-center p-2 bg-melo-gray border-left">افزودن</a>
+        </div>
+        <div style="width: 500px;" class="bg-white row justify-content-center mx-auto py-4">
+            <!-- search contracts -->
+            <div v-show="activeDisplay=='search'" style="width: 500px;" class="row text-center">
+                <div class="col-12 my-2">
+                    <h5>جستجو مخاطب</h5>
+                </div>
+                <div class="col-12 mb-4">
+                    <input type="text" class="form-control" v-model="search" placeholder="نام مخاطب را وارد کنید...">
+                </div>
+                </form>
+                <hr>
+                <ul>
+                    <li class="alert alert-danger list-unstyled" v-if="getContactsByFilter.length===0">مخاطبی وجود ندارد
+                        !</li>
+                    <li class="list-unstyled contacts my-2" v-for="contact in getContactsByFilter">
+                        <p class="justify-content-between d-flex">
+                            <span>نام: {{contact.name}}</span>
+                            <span>تلفن: {{contact.phone}}</span>
+                        </p>
+                        <p class="justify-content-between d-flex">
+                            <p>ایمیل: {{contact.email}}</p>
+                            <button @click="deleteContact(contact.email)" class="btn btn-danger">حذف</button>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <!-- add contracts -->
+            <div v-show="activeDisplay=='add'" style="width: 500px;">
+                <form @submit.prevent="addContact" action="#" class="row text-center">
+                    <div class="col-12 mb-2">
+                        <h5>افزودن مخاطبین</h5>
+                    </div>
+                    <div class="row">
+
+                    <div class="col-6 text-start">
+                        <label for="fullName">نام و نام خانوادگی:</label>
+                        <input required v-model="contact.name" type="text" id="fullName" class="form-control"
+                            placeholder="نام و نام خانوادگی">
+                    </div>
+                    <div class="col-6 text-start">
+                        <label for="fullName">شماره تلفن:</label>
+                        <input required v-model="contact.phone" autocomplete="off" minlength="11" maxlength="11" type="text"
+                            id="fullName" class="form-control" placeholder="*********09">
+                    </div>
+                    </div>
+                    <div style="width: 500px;" class="row my-4">
+                        <div class="col-12 text-start">ایمیل:</div>
+                        <div class="col-12">
+                            <input required v-model="contact.email" type="text" class="form-control"
+                                placeholder="ایمیل را نام ببرید...">
+                        </div>
+                        <!-- click cotract -->
+                        <div class="col-12">
+                            <button class="mt-2 btn btn-dark form-control">ثبت مخاطب</button>
+                        </div>
+                    </div>
+            </div>
+            <!-- see all the contracts -->
+            <div v-show="activeDisplay=='all'" class="row">
+                <ul>
+                    <li class="alert alert-danger list-unstyled" v-if="contacts.length===0">مخاطبی وجود ندارد !</li>
+                    <li class="list-unstyled contacts my-2" v-for="contact in contacts">
+                        <p class="justify-content-between d-flex">
+                            <span>نام: {{contact.name}}</span>
+                            <span>تلفن: {{contact.phone}}</span>
+                        </p>
+                        <p class="justify-content-between d-flex">
+                            <p>ایمیل: {{contact.email}}</p>
+                            <button @click="deleteContact(contact.email)" class="btn btn-danger">حذف</button>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="./cdns/toastr.js"></script>
+        <script src="./app.js"></script>
+</body>
+</html>
